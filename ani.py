@@ -36,9 +36,9 @@ def print3poker(poker1, poker2, poker3):
 			if nu[i][j] == '\n': break
 	for i in range(h):
 		for j in range(len(su)):
-			print(su[j][i*suw[j]:(i+1)*suw[j]-1] + nu[j][i*nuw[j]:(i+1)*nuw[j]-1],end = '____|____')
+			print(su[j][i*suw[j]:(i+1)*suw[j]-1] + nu[j][i*nuw[j]:(i+1)*nuw[j]-1],end = ('' if j == len(su) - 1 else '|'))
 		print("")
-	return sum(suw) + sum(nuw) + 9*2
+	return sum(suw) + sum(nuw) + 2
 	
 def print3pokerwithnoisy(poker1, poker2, poker3, p = 1):
 	move(0, 0)
@@ -48,18 +48,25 @@ def print3pokerwithnoisy(poker1, poker2, poker3, p = 1):
 		for j in range(w):
 			if random.uniform(0, 1) <= p:
 				print(random.choice(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '/']), end = '')
+			"""
 			else:
 				move(i, j)
+			"""
 		print("")
 
 def main():
 	while True:
 		clear()
 		t1 = time.time()
+		poker1, poker2, poker3 = random.choice(decker), random.choice(decker), random.choice(decker)
+		#poker1, poker2, poker3 = decker[9], decker[9], decker[9]
+		#poker1, poker2, poker3 = decker[9], decker[22], decker[22]
+		#poker1, poker2, poker3 = decker[35], decker[35], decker[35]
+		#poker1, poker2, poker3 = decker[48], decker[48], decker[48]
 		while True:
 			t2 = time.time()
-			print3pokerwithnoisy(random.choice(decker), random.choice(decker), random.choice(decker), 1 - (t2 - t1) / 6)
-			time.sleep(0.05)
+			print3pokerwithnoisy(poker1, poker2, poker3, 1 - (t2 - t1) / 6)
+			time.sleep(0.07)
 			if t2 - t1 > 6: break
 		move(35, 0)
 		ch = input("contine? [y/n]: ")
